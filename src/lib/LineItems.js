@@ -8,11 +8,22 @@ export default class LineItems {
 
   constructor(items = []) {
     this.items = items;
-    this.totalEffort = totalEffortCalc(this.items);
+    this.length = items.length;
+  }
+
+  update(idx, lineItem) {
+    const updatedItems = [...this.items];
+    updatedItems[idx] = lineItem;
+
+    return new LineItems(updatedItems);
+  }
+
+  totalEffort() {
+    return this.items.reduce((acc, item) => acc + item.weightedAvg(), 0);
   }
 
   effortInDays() {
-    return this.totalEffort / 8;
+    return this.totalEffort() / 8;
   }
 
   effortInWeeks() {
@@ -23,8 +34,4 @@ export default class LineItems {
     const increment = this.effortInWeeks() * percent / 100;
     return this.effortInWeeks() + increment;
   }
-}
-
-function totalEffortCalc(items) {
-  return items.reduce((acc, item) => acc + item.weightedAvg(), 0);
 }

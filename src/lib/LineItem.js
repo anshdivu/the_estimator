@@ -1,8 +1,18 @@
 export default class LineItem {
-  constructor({ optimistic = 0, likely = 0, pessimistic = 0 } = {}) {
+  constructor({
+    description = '',
+    optimistic = 0,
+    likely = 0,
+    pessimistic = 0
+  } = {}) {
+    this.description = description;
     this.optimistic = optimistic;
     this.likely = likely;
     this.pessimistic = pessimistic;
+  }
+
+  update(data) {
+    return new LineItem({ ...this, ...data });
   }
 
   weightedAvg() {

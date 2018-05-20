@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Input } from 'semantic-ui-react';
 
 const updateItem = (item, onChange) => key => event => {
-  const updatedItem = item.update({ [key]: event.target.value });
+  const updatedItem = item.update({ [key]: +event.target.value });
   onChange(updatedItem);
 };
 

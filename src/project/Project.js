@@ -6,26 +6,20 @@ import Results from './Results';
 import { Container, Header, Grid } from 'semantic-ui-react';
 
 export default class Project extends React.Component {
-  state = {
-    items: LineItemsModel.convert([
-      {
-        description: 'Description 1',
-        optimistic: 1,
-        likely: 1,
-        pessimistic: 1
-      },
-      {
-        description: 'Description 2',
-        optimistic: 2,
-        likely: 2,
-        pessimistic: 2
-      }
-    ])
+  constructor(props) {
+    super(props);
+    this.state = this.getInitState();
+  }
+
+  getInitState = () => {
+    const projectData = window.localStorage.getItem('items') || '[]';
+    return { items: LineItemsModel.convert(JSON.parse(projectData)) };
   };
 
   handleChange = items => {
-    console.log(items);
-    this.setState({ items });
+    this.setState({ items }, () => {
+      window.localStorage.setItem('items', JSON.stringify(items.items));
+    });
   };
 
   render() {
@@ -37,10 +31,10 @@ export default class Project extends React.Component {
           PROJECT
         </Header>
         <Grid columns={2}>
-          <Grid.Column floated="left" width={10}>
+          <Grid.Column floated="left" width={13}>
             <LineItems items={items} onUpdate={this.handleChange} />
           </Grid.Column>
-          <Grid.Column floated="right" width={6}>
+          <Grid.Column floated="right" width={3}>
             <Results items={items} />
           </Grid.Column>
         </Grid>

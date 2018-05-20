@@ -17,7 +17,7 @@ export default function LineItems({ items, onUpdate }) {
       </Table.Header>
 
       <Table.Body>
-        {(items.items ? items.items : items).map((item, idx) => (
+        {items.items.map((item, idx) => (
           <LineItem item={item} key={idx} onChange={handleChange(idx)} />
         ))}
       </Table.Body>

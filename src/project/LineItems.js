@@ -55,10 +55,11 @@ function AddNewLineItem({ onClick }) {
 function LineItemTitle() {
   return (
     <Table.Row>
-      <Table.HeaderCell width={5}>Description</Table.HeaderCell>
+      <Table.HeaderCell width={4}>Description</Table.HeaderCell>
       <Table.HeaderCell width={1}>Optimistic</Table.HeaderCell>
       <Table.HeaderCell width={1}>Likely</Table.HeaderCell>
       <Table.HeaderCell width={1}>Pessimistic</Table.HeaderCell>
+      <Table.HeaderCell width={1}>Avg</Table.HeaderCell>
     </Table.Row>
   );
 }

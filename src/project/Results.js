@@ -7,7 +7,6 @@ export default function Results({ items, onUpdate }) {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Total Effort</Table.HeaderCell>
-          <Table.HeaderCell />
         </Table.Row>
       </Table.Header>
 
@@ -23,8 +22,7 @@ export default function Results({ items, onUpdate }) {
 function InHours({ effort }) {
   return (
     <Table.Row>
-      <Table.Cell>In Hours</Table.Cell>
-      <Table.Cell>{effort}</Table.Cell>
+      <Table.Cell>{effort} Hours</Table.Cell>
     </Table.Row>
   );
 }
@@ -36,8 +34,7 @@ function InDays({ effort }) {
 
   return (
     <Table.Row>
-      <Table.Cell>In Days</Table.Cell>
-      <Table.Cell>{effort}</Table.Cell>
+      <Table.Cell>{effort} Days</Table.Cell>
     </Table.Row>
   );
 }
@@ -49,8 +46,7 @@ function InWeeks({ effort }) {
 
   return (
     <Table.Row>
-      <Table.Cell>In Weeks</Table.Cell>
-      <Table.Cell>{effort}</Table.Cell>
+      <Table.Cell>{effort} Weeks</Table.Cell>
     </Table.Row>
   );
 }

@@ -12,13 +12,15 @@ export default class Project extends React.Component {
   }
 
   getInitState = () => {
-    const projectData = window.localStorage.getItem('items') || '[]';
+    const projectData =
+      (window.localStorage && window.localStorage.getItem('items')) || '[]';
     return { items: LineItemsModel.convert(JSON.parse(projectData)) };
   };
 
   handleChange = items => {
     this.setState({ items }, () => {
-      window.localStorage.setItem('items', JSON.stringify(items.items));
+      window.localStorage &&
+        window.localStorage.setItem('items', JSON.stringify(items.items));
     });
   };
 
@@ -31,10 +33,10 @@ export default class Project extends React.Component {
           PROJECT
         </Header>
         <Grid columns={2}>
-          <Grid.Column floated="left" width={13}>
+          <Grid.Column floated="left" width={14}>
             <LineItems items={items} onUpdate={this.handleChange} />
           </Grid.Column>
-          <Grid.Column floated="right" width={3}>
+          <Grid.Column floated="right" width={2}>
             <Results items={items} />
           </Grid.Column>
         </Grid>

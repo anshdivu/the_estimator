@@ -1,8 +1,9 @@
 import React from 'react';
 import LineItemsModel from '../lib/LineItems';
 import LineItems from './LineItems';
+import Results from './Results';
 
-import { Header, Grid } from 'semantic-ui-react';
+import { Container, Header, Grid } from 'semantic-ui-react';
 
 export default class Project extends React.Component {
   state = {
@@ -31,19 +32,19 @@ export default class Project extends React.Component {
     const { items } = this.state;
 
     return (
-      <div>
+      <Container>
         <Header size="huge" textAlign="left">
           PROJECT
         </Header>
-        <Grid>
+        <Grid columns={2}>
           <Grid.Column floated="left" width={10}>
             <LineItems items={items} onUpdate={this.handleChange} />
           </Grid.Column>
           <Grid.Column floated="right" width={6}>
-            {/* <Results items={items} /> */}
+            <Results items={items} />
           </Grid.Column>
         </Grid>
-      </div>
+      </Container>
     );
   }
 }

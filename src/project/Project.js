@@ -1,9 +1,9 @@
 import React from 'react';
+import { Button, Container, Grid, Header, Segment } from 'semantic-ui-react';
+
 import LineItemsModel from '../lib/LineItems';
 import LineItems from './LineItems';
 import Results from './Results';
-
-import { Container, Header, Grid } from 'semantic-ui-react';
 
 export default class Project extends React.Component {
   constructor(props) {
@@ -24,14 +24,28 @@ export default class Project extends React.Component {
     });
   };
 
+  resetState = () => {
+    this.setState({ items: LineItemsModel.convert([]) }, () => {
+      window.localStorage &&
+        window.localStorage.setItem('items', JSON.stringify([]));
+    });
+  };
+
   render() {
     const { items } = this.state;
 
     return (
       <Container>
-        <Header size="huge" textAlign="left">
-          PROJECT
-        </Header>
+        <Segment clearing>
+          <Header size="huge" floated="left">
+            Project
+          </Header>
+          <Header floated="right">
+            <Button basic color="black" onClick={this.resetState}>
+              Reset
+            </Button>
+          </Header>
+        </Segment>
         <Grid columns={2}>
           <Grid.Column floated="left" width={14}>
             <LineItems items={items} onUpdate={this.handleChange} />

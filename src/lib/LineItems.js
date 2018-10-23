@@ -1,5 +1,6 @@
 import LineItem from './LineItem';
 import * as Papa from 'papaparse';
+import * as Excel from './excel';
 
 export default class LineItems {
   static convert(rawItems = []) {
@@ -38,5 +39,9 @@ export default class LineItems {
 
   toCsv() {
     return Papa.unparse(this.items);
+  }
+
+  toExcel() {
+    return Excel.convert(this);
   }
 }

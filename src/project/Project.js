@@ -31,7 +31,11 @@ export default class Project extends React.Component {
     });
   };
 
-  download = items => {
+  downloadExcel = items => {
+    items.toExcel();
+  };
+
+  downloadCsv = items => {
     const a = document.createElement('a');
     const blob = new Blob([items.toCsv()], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
@@ -59,9 +63,16 @@ export default class Project extends React.Component {
             <Button
               basic
               color="black"
-              onClick={() => this.download(this.state.items)}
+              onClick={() => this.downloadCsv(this.state.items)}
             >
               Download CSV
+            </Button>
+            <Button
+              basic
+              color="black"
+              onClick={() => this.downloadExcel(this.state.items)}
+            >
+              Download Excel
             </Button>
           </Header>
         </Segment>

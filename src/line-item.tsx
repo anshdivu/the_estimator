@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Item from "./core/line-item";
 
 type OnChangeProp = (item: Item) => void;
+type OnLocationChangeProp = (move: "up" | "down") => void;
 
 function useLineItem(initialItem = new Item()) {
   const [item, setItem] = useState(initialItem);
@@ -19,56 +20,65 @@ function useLineItem(initialItem = new Item()) {
 export default function LineItem({
   item: initialValue,
   onChange,
-  onDelete
+  onDelete,
+  onLocationChange
 }: {
   item: Item;
   onChange?: OnChangeProp;
   onDelete?: OnChangeProp;
+  onLocationChange?: OnLocationChangeProp;
 }) {
   const [item, updateItem] = useLineItem(initialValue);
 
   return (
-    <div className="bt b--black-50">
-      <label className="fl w-10">
-        Delete
+    <tr className="bb">
+      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
+        <button
+          disabled={!onLocationChange}
+          onClick={() => onLocationChange && onLocationChange("down")}
+        >
+          <span role="img" aria-label="Delete">
+            ⥯
+          </span>
+        </button>
         <button disabled={!onDelete} onClick={() => onDelete && onDelete(item)}>
           <span role="img" aria-label="Delete">
             ❌
           </span>
         </button>
-      </label>
-      <label className="fl w-30">
-        Description:
+      </th>
+      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
         <input
+          className="w-90"
           type="text"
           value={item.description}
           onChange={e => updateItem({ description: e.target.value }, onChange)}
         />
-      </label>
-      <label className="fl w-20">
-        Optimistic:
+      </th>
+      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
         <input
+          className="w-90"
           type="number"
           value={item.optimistic}
           onChange={e => updateItem({ optimistic: +e.target.value }, onChange)}
         />
-      </label>
-      <label className="fl w-20">
-        Likely:
+      </th>
+      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
         <input
+          className="w-90"
           type="number"
           value={item.likely}
           onChange={e => updateItem({ likely: +e.target.value }, onChange)}
         />
-      </label>
-      <label className="fl w-20">
-        Pessimistic:
+      </th>
+      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
         <input
+          className="w-90"
           type="number"
           value={item.pessimistic}
           onChange={e => updateItem({ pessimistic: +e.target.value }, onChange)}
         />
-      </label>
-    </div>
+      </th>
+    </tr>
   );
 }

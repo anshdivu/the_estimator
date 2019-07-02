@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import LineItem from "./line-item";
 import Item from "./core/line-item";
 
+function reorder<T>(list: T[], startIndex: number, endIndex: number) {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+}
+
 export default function Project() {
   const [items, setItems] = useState([new Item()]);
 
@@ -20,21 +28,47 @@ export default function Project() {
       return newItems;
     });
 
+  const reorderItem = (currentIndex: number) => (move: "up" | "down") => {
+    switch (move) {
+      case "up":
+        return setItems(prev => reorder(prev, currentIndex, currentIndex - 1));
+
+      case "down":
+        return setItems(prev => reorder(prev, currentIndex, currentIndex + 1));
+    }
+  };
+
   console.log(JSON.stringify(items));
 
   return (
     <>
-      {items.map((item, idx) => (
-        <div key={idx} className="bt b--black-50">
-          <LineItem
-            item={item}
-            key={idx}
-            onChange={updateItem(idx)}
-            onDelete={items.length > 1 ? deleteItem(idx) : undefined}
-          />
-        </div>
-      ))}
-      <button onClick={addNewItem}>New Item</button>
+      <table className="w-80 mw9 ba br--top" cellSpacing="0">
+        <thead>
+          <tr className="bg-light-gray">
+            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1"></th>
+            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Description</th>
+            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Optimistic</th>
+            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Likely</th>
+            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Pessimistic</th>
+          </tr>
+        </thead>
+        <tbody className="lh-copy">
+          {items.map((item, idx) => (
+            <LineItem
+              item={item}
+              key={idx}
+              onChange={updateItem(idx)}
+              onDelete={items.length > 1 ? deleteItem(idx) : undefined}
+              onLocationChange={items.length > 1 ? reorderItem(idx) : undefined}
+            />
+          ))}
+          <tr className="bg-light-gray">
+            <th colSpan={5}>
+              <button onClick={addNewItem}>New Item</button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 }

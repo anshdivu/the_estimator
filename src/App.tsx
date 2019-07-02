@@ -4,8 +4,10 @@ import Project from "./project";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Project />
+    <div className="pa4">
+      <div className="overflow-auto">
+        <Project />
+      </div>
     </div>
   );
 };

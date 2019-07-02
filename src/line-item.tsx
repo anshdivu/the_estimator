@@ -18,10 +18,12 @@ function useLineItem(initialItem = new Item()) {
 
 export default function LineItem({
   item: initialValue,
-  onChange
+  onChange,
+  onDelete
 }: {
   item: Item;
   onChange?: OnChangeProp;
+  onDelete?: OnChangeProp;
 }) {
   const [item, updateItem] = useLineItem(initialValue);
 
@@ -29,12 +31,8 @@ export default function LineItem({
     <div className="bt b--black-50">
       <label className="fl w-10">
         Delete
-        <button>
-          <span
-            role="img"
-            aria-label="Delete"
-            onClick={() => alert("finish delete feature")}
-          >
+        <button disabled={!onDelete} onClick={() => onDelete && onDelete(item)}>
+          <span role="img" aria-label="Delete">
             ❌
           </span>
         </button>

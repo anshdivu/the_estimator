@@ -1,7 +1,7 @@
-import LineItem from './line-item';
+import LineItem from "./line-item";
 
 export default class Project {
-  constructor(public name = 'Project', public items: LineItem[] = []) {}
+  constructor(public name = "Project", public items: LineItem[] = []) {}
 
   effortInHours = () =>
     this.items.reduce((acc, item) => acc + item.weightedAvg(), 0);

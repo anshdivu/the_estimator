@@ -1,5 +1,5 @@
 export default class LineItem {
-  public description = '';
+  public description = "";
   public optimistic = 0;
   public likely = 0;
   public pessimistic = 0;

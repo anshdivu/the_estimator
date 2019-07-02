@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Item from './core/line-item';
+import React, { useState } from "react";
+import Item from "./core/line-item";
 
 type OnChangeProp = (item: Item) => void;
 
@@ -33,7 +33,7 @@ export default function LineItem({
           <span
             role="img"
             aria-label="Delete"
-            onClick={() => alert('finish delete feature')}
+            onClick={() => alert("finish delete feature")}
           >
             ❌
           </span>

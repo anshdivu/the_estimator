@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import LineItem from './line-item';
-import Item from './core/line-item';
+import React, { useState } from "react";
+import LineItem from "./line-item";
+import Item from "./core/line-item";
 
 export default function Project() {
   let [items, setItems] = useState([new Item()]);

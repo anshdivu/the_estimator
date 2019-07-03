@@ -29,7 +29,9 @@ export default function LineItem({
   onLocationChange?: OnLocationChangeProp;
 }) {
   const [item, updateItem] = useLineItem(initialValue);
-  useEffect(() => updateItem(initialValue), [initialValue, updateItem]);
+
+  // eslint-disable-next-line
+  useEffect(() => updateItem(initialValue), [initialValue]);
 
   return (
     <tr className="bb">
@@ -87,6 +89,9 @@ export default function LineItem({
           value={item.pessimistic}
           onChange={e => updateItem({ pessimistic: +e.target.value }, onChange)}
         />
+      </th>
+      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
+        <span className="w-90">{item.weightedAvg()}</span>
       </th>
     </tr>
   );

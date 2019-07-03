@@ -8,8 +8,8 @@ export default class LineItem {
     Object.assign(this, partialItem);
   }
 
-  weightedAvg = () => {
+  weightedAvg() {
     const avg = (this.optimistic + 4 * this.likely + this.pessimistic) / 6;
     return Math.round(avg);
-  };
+  }
 }

@@ -50,6 +50,7 @@ export default function Project() {
             <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Optimistic</th>
             <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Likely</th>
             <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Pessimistic</th>
+            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Avg</th>
           </tr>
         </thead>
         <tbody className="lh-copy">
@@ -63,7 +64,7 @@ export default function Project() {
             />
           ))}
           <tr className="bg-light-gray">
-            <th colSpan={5}>
+            <th colSpan={6}>
               <button onClick={addNewItem}>New Item</button>
             </th>
           </tr>

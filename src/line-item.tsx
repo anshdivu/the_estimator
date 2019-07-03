@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Item from "./core/line-item";
 
 type OnChangeProp = (item: Item) => void;
@@ -29,16 +29,25 @@ export default function LineItem({
   onLocationChange?: OnLocationChangeProp;
 }) {
   const [item, updateItem] = useLineItem(initialValue);
+  useEffect(() => updateItem(initialValue), [initialValue, updateItem]);
 
   return (
     <tr className="bb">
       <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
         <button
           disabled={!onLocationChange}
+          onClick={() => onLocationChange && onLocationChange("up")}
+        >
+          <span role="img" aria-label="Delete">
+            ↑
+          </span>
+        </button>
+        <button
+          disabled={!onLocationChange}
           onClick={() => onLocationChange && onLocationChange("down")}
         >
           <span role="img" aria-label="Delete">
-            ⥯
+            ↓
           </span>
         </button>
         <button disabled={!onDelete} onClick={() => onDelete && onDelete(item)}>

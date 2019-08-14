@@ -34,9 +34,11 @@ export default function LineItem({
   useEffect(() => updateItem(initialValue), [initialValue]);
 
   return (
-    <tr className="bb">
-      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
+    <div className="dt-row bb ">
+      {/* <div className="dtc fl w-20 */}
+      <div className="dtc fl pa2 w-10">
         <button
+          className="lh-copy"
           disabled={!onLocationChange}
           onClick={() => onLocationChange && onLocationChange("up")}
         >
@@ -45,6 +47,7 @@ export default function LineItem({
           </span>
         </button>
         <button
+          className="lh-copy"
           disabled={!onLocationChange}
           onClick={() => onLocationChange && onLocationChange("down")}
         >
@@ -52,47 +55,51 @@ export default function LineItem({
             ↓
           </span>
         </button>
-        <button disabled={!onDelete} onClick={() => onDelete && onDelete(item)}>
+        <button
+          className="lh-copy"
+          disabled={!onDelete}
+          onClick={() => onDelete && onDelete(item)}
+        >
           <span role="img" aria-label="Delete">
             ❌
           </span>
         </button>
-      </th>
-      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
+      </div>
+      <div className="dtc fl pa2 w-50">
         <input
-          className="w-90"
+          className="w-90 lh-copy"
           type="text"
           value={item.description}
           onChange={e => updateItem({ description: e.target.value }, onChange)}
         />
-      </th>
-      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
+      </div>
+      <div className="dtc fl pa2 w-10">
         <input
-          className="w-90"
+          className="mw lh-copy"
           type="number"
           value={item.optimistic}
           onChange={e => updateItem({ optimistic: +e.target.value }, onChange)}
         />
-      </th>
-      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
+      </div>
+      <div className="dtc fl pa2 w-10">
         <input
-          className="w-90"
+          className="mw lh-copy"
           type="number"
           value={item.likely}
           onChange={e => updateItem({ likely: +e.target.value }, onChange)}
         />
-      </th>
-      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
+      </div>
+      <div className="dtc fl pa2 w-10">
         <input
-          className="w-90"
+          className="mw lh-copy"
           type="number"
           value={item.pessimistic}
           onChange={e => updateItem({ pessimistic: +e.target.value }, onChange)}
         />
-      </th>
-      <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">
-        <span className="w-90">{item.weightedAvg()}</span>
-      </th>
-    </tr>
+      </div>
+      <div className="dtc fl fw6 pa2 w-10">
+        <span className="mw lh-copy">{item.weightedAvg()}</span>
+      </div>
+    </div>
   );
 }

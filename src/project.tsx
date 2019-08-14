@@ -42,34 +42,30 @@ export default function Project() {
 
   return (
     <>
-      <table className="w-80 mw9 ba br--top" cellSpacing="0">
-        <thead>
-          <tr className="bg-light-gray">
-            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1"></th>
-            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Description</th>
-            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Optimistic</th>
-            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Likely</th>
-            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Pessimistic</th>
-            <th className="fw6 bb b--black-20 tc pb2 pt2 pl1">Avg</th>
-          </tr>
-        </thead>
-        <tbody className="lh-copy">
-          {items.map((item, idx) => (
-            <LineItem
-              item={item}
-              key={idx}
-              onChange={updateItem(idx)}
-              onDelete={items.length > 1 ? deleteItem(idx) : undefined}
-              onLocationChange={items.length > 1 ? reorderItem(idx) : undefined}
-            />
-          ))}
-          <tr className="bg-light-gray">
-            <th colSpan={6}>
-              <button onClick={addNewItem}>New Item</button>
-            </th>
-          </tr>
-        </tbody>
-      </table>
+      <div className="dt w-75 mw9 ba br--top lh-copy">
+        <div className="bg-light-gray dt-row">
+          <div className="dtc fl w-10 fw6 pa2"></div>
+          <div className="dtc fl w-50 fw6 pa2">Description</div>
+          <div className="dtc fl w-10 fw6 pa2">Optimistic</div>
+          <div className="dtc fl w-10 fw6 pa2">Likely</div>
+          <div className="dtc fl w-10 fw6 pa2">Pessimistic</div>
+          <div className="dtc fl w-10 fw6 pa2">Avg</div>
+        </div>
+        {items.map((item, idx) => (
+          <LineItem
+            item={item}
+            key={idx}
+            onChange={updateItem(idx)}
+            onDelete={items.length > 1 ? deleteItem(idx) : undefined}
+            onLocationChange={items.length > 1 ? reorderItem(idx) : undefined}
+          />
+        ))}
+        <div className="dt-row bg-light-gray w-100">
+          <div className="dtc pa2 tc">
+            <button onClick={addNewItem}>New Item</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

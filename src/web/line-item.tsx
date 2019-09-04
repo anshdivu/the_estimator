@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Item from "./core/line-item";
+import Item from "../domain/line-item";
 
 type OnChangeProp = (item: Item) => void;
 type OnLocationChangeProp = (move: "up" | "down") => void;

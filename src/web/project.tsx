@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import Item from "../domain/line-item";
 import LineItem from "./line-item";
-import Item from "./core/line-item";
 
 function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   const result = Array.from(list);
@@ -13,6 +13,8 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
 export default function Project() {
   const [items, setItems] = useState([new Item()]);
 
+  const addNewItem = () => setItems(prev => prev.concat([new Item()]));
+
   const updateItem = (idx: number) => (update: Item) =>
     setItems(prev => {
       const newItems = [...prev];
@@ -20,7 +22,6 @@ export default function Project() {
       return newItems;
     });
 
-  const addNewItem = () => setItems(prev => prev.concat([new Item()]));
   const deleteItem = (idx: number) => () =>
     setItems(prev => {
       const newItems = [...prev];

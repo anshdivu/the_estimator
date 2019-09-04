@@ -1,4 +1,6 @@
 import React from "react";
+import { downloadProjectAsCsv } from "../export/project.csv";
+import { downloadProjectAsExcel } from "../export/project.excel";
 import useProject from "../project/project.hook";
 import LineItem from "./line-item";
 
@@ -32,6 +34,12 @@ export default function Project() {
         <div className="dt-row bg-light-gray w-100">
           <div className="dtc pa2 tc">
             <button onClick={state.appendNewItem}>New Item</button>
+            <button onClick={() => downloadProjectAsCsv(project)}>
+              Download CSV
+            </button>
+            <button onClick={() => downloadProjectAsExcel(project)}>
+              Dowbload Excel
+            </button>
           </div>
         </div>
       </div>

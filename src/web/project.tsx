@@ -1,45 +1,11 @@
-import React, { useState } from "react";
-import Item from "../domain/line-item";
+import React from "react";
+import useLineItems from "./project.hook";
 import LineItem from "./line-item";
 
-function reorder<T>(list: T[], startIndex: number, endIndex: number) {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-}
-
 export default function Project() {
-  const [items, setItems] = useState([new Item()]);
+  const project = useLineItems();
 
-  const addNewItem = () => setItems(prev => prev.concat([new Item()]));
-
-  const updateItem = (idx: number) => (update: Item) =>
-    setItems(prev => {
-      const newItems = [...prev];
-      newItems[idx] = update;
-      return newItems;
-    });
-
-  const deleteItem = (idx: number) => () =>
-    setItems(prev => {
-      const newItems = [...prev];
-      newItems.splice(idx, 1);
-      return newItems;
-    });
-
-  const reorderItem = (currentIndex: number) => (move: "up" | "down") => {
-    switch (move) {
-      case "up":
-        return setItems(prev => reorder(prev, currentIndex, currentIndex - 1));
-
-      case "down":
-        return setItems(prev => reorder(prev, currentIndex, currentIndex + 1));
-    }
-  };
-
-  console.log(JSON.stringify(items));
+  console.log(JSON.stringify(project.items));
 
   return (
     <>
@@ -52,18 +18,22 @@ export default function Project() {
           <div className="dtc fl w-10 fw6 pa2">Pessimistic</div>
           <div className="dtc fl w-10 fw6 pa2">Avg</div>
         </div>
-        {items.map((item, idx) => (
+        {project.items.map((item, idx) => (
           <LineItem
             item={item}
             key={idx}
-            onChange={updateItem(idx)}
-            onDelete={items.length > 1 ? deleteItem(idx) : undefined}
-            onLocationChange={items.length > 1 ? reorderItem(idx) : undefined}
+            onChange={project.updateItem(idx)}
+            onDelete={
+              project.items.length > 1 ? project.deleteItem(idx) : undefined
+            }
+            onLocationChange={
+              project.items.length > 1 ? project.reorderItem(idx) : undefined
+            }
           />
         ))}
         <div className="dt-row bg-light-gray w-100">
           <div className="dtc pa2 tc">
-            <button onClick={addNewItem}>New Item</button>
+            <button onClick={project.appendNewItem}>New Item</button>
           </div>
         </div>
       </div>

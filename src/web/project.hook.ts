@@ -9,8 +9,11 @@ export default function useProject(
 
   const appendNewItem = () => setProject(prev => prev.addItem(new LineItem()));
 
-  const updateItem = (index: number) => (update: LineItem) =>
-    setProject(prev => prev.updateItem(index, update));
+  const updateItem = (index: number) => (update: Partial<LineItem>) =>
+    setProject(prev => {
+      const updatedItem = new LineItem({ ...prev.items[index], ...update });
+      return prev.updateItem(index, updatedItem);
+    });
 
   const deleteItem = (index: number) => () =>
     setProject(prev => prev.deleteItem(index));

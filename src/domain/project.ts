@@ -8,22 +8,22 @@ export default class Project {
   }
 
   addItem(item: LineItem) {
-    const newItems = this.items.concat([item]);
-    return this.update(newItems);
+    const updatedItems = this.items.concat([item]);
+    return this.update(updatedItems);
   }
 
   updateItem(index: number, item: LineItem) {
-    const newItems = [...this.items];
-    newItems[index] = item;
+    const updatedItems = [...this.items];
+    updatedItems[index] = item;
 
-    return this.update(newItems);
+    return this.update(updatedItems);
   }
 
   deleteItem(index: number) {
-    const newItems = [...this.items];
-    newItems.splice(index, 1);
+    const updatedItems = [...this.items];
+    updatedItems.splice(index, 1);
 
-    return this.update(newItems);
+    return this.update(updatedItems);
   }
 
   effortInHours = () =>

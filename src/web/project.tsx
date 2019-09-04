@@ -5,8 +5,6 @@ import LineItem from "./line-item";
 export default function Project() {
   const { project, ...state } = useProject();
 
-  console.log(JSON.stringify(project.items));
-
   return (
     <>
       <div className="dt w-75 mw9 ba br--top lh-copy">

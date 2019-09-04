@@ -12,9 +12,11 @@ export default class Project {
     return this.update(updatedItems);
   }
 
-  updateItem(index: number, item: LineItem) {
+  updateItem(index: number, update: Partial<LineItem>) {
+    const updatedItem = new LineItem({ ...this.items[index], ...update });
+
     const updatedItems = [...this.items];
-    updatedItems[index] = item;
+    updatedItems[index] = updatedItem;
 
     return this.update(updatedItems);
   }

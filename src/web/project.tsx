@@ -1,9 +1,9 @@
 import React from "react";
-import useLineItems from "./project.hook";
+import useProject from "./project.hook";
 import LineItem from "./line-item";
 
 export default function Project() {
-  const project = useLineItems();
+  const { project, ...state } = useProject();
 
   console.log(JSON.stringify(project.items));
 
@@ -22,18 +22,18 @@ export default function Project() {
           <LineItem
             item={item}
             key={idx}
-            onChange={project.updateItem(idx)}
+            onChange={state.updateItem(idx)}
             onDelete={
-              project.items.length > 1 ? project.deleteItem(idx) : undefined
+              project.items.length > 1 ? state.deleteItem(idx) : undefined
             }
             onLocationChange={
-              project.items.length > 1 ? project.reorderItem(idx) : undefined
+              project.items.length > 1 ? state.reorderItem(idx) : undefined
             }
           />
         ))}
         <div className="dt-row bg-light-gray w-100">
           <div className="dtc pa2 tc">
-            <button onClick={project.appendNewItem}>New Item</button>
+            <button onClick={state.appendNewItem}>New Item</button>
           </div>
         </div>
       </div>

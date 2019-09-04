@@ -1,5 +1,38 @@
 import { useState } from "react";
-import Item from "../domain/line-item";
+import LineItem from "../domain/line-item";
+import Project from "../domain/project";
+
+export default function useProject(
+  initValue = new Project("Project", [new LineItem()])
+) {
+  const [project, setProject] = useState(initValue);
+
+  const appendNewItem = () => setProject(prev => prev.addItem(new LineItem()));
+
+  const updateItem = (index: number) => (update: LineItem) =>
+    setProject(prev => prev.updateItem(index, update));
+
+  const deleteItem = (index: number) => () =>
+    setProject(prev => prev.deleteItem(index));
+
+  const reorderItem = (currentIndex: number) => (move: "up" | "down") => {
+    switch (move) {
+      case "up":
+        return setProject(prev => {
+          const items = reorder(prev.items, currentIndex, currentIndex - 1);
+          return prev.update(items);
+        });
+
+      case "down":
+        return setProject(prev => {
+          const items = reorder(prev.items, currentIndex, currentIndex + 1);
+          return prev.update(items);
+        });
+    }
+  };
+
+  return { project, appendNewItem, updateItem, deleteItem, reorderItem };
+}
 
 function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   const result = Array.from(list);
@@ -7,36 +40,4 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   result.splice(endIndex, 0, removed);
 
   return result;
-}
-
-export default function useLineItems(initValues = [new Item()]) {
-  const [items, setItems] = useState(initValues);
-
-  const appendNewItem = () => setItems(prev => prev.concat([new Item()]));
-
-  const updateItem = (idx: number) => (update: Item) =>
-    setItems(prev => {
-      const newItems = [...prev];
-      newItems[idx] = update;
-      return newItems;
-    });
-
-  const deleteItem = (idx: number) => () =>
-    setItems(prev => {
-      const newItems = [...prev];
-      newItems.splice(idx, 1);
-      return newItems;
-    });
-
-  const reorderItem = (currentIndex: number) => (move: "up" | "down") => {
-    switch (move) {
-      case "up":
-        return setItems(prev => reorder(prev, currentIndex, currentIndex - 1));
-
-      case "down":
-        return setItems(prev => reorder(prev, currentIndex, currentIndex + 1));
-    }
-  };
-
-  return { items, appendNewItem, updateItem, deleteItem, reorderItem };
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import LineItem from "../domain/line-item";
-import Project from "../domain/project";
+import LineItem from "./line-item";
+import Project from "./project";
 
 export default function useProject(
   initValue = new Project("Project", [new LineItem()])

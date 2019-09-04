@@ -1,9 +1,6 @@
 import React from "react";
 import Item from "../domain/line-item";
 
-type OnChangeProp = (update: Partial<Item>) => void;
-type OnLocationChangeProp = (move: "up" | "down") => void;
-
 export default function LineItem({
   item,
   onChange = () => {},
@@ -11,9 +8,9 @@ export default function LineItem({
   onLocationChange
 }: {
   item: Item;
-  onChange?: OnChangeProp;
-  onDelete?: OnChangeProp;
-  onLocationChange?: OnLocationChangeProp;
+  onChange?: (update: Partial<Item>) => void;
+  onDelete?: (item: Item) => void;
+  onLocationChange?: (move: "up" | "down") => void;
 }) {
   return (
     <div className="dt-row bb ">

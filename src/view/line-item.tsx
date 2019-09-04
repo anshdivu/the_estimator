@@ -1,5 +1,5 @@
 import React from "react";
-import Item from "../domain/line-item";
+import Item from "../project/line-item";
 
 export default function LineItem({
   item,

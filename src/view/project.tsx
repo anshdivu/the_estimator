@@ -1,5 +1,5 @@
 import React from "react";
-import useProject from "../domain/project.hook";
+import useProject from "../project/project.hook";
 import LineItem from "./line-item";
 
 export default function Project() {
